@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .email-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .footer {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Son Xəbər Yeniləmə</h1>
+        </div>
+        <div class="content">
+            <p>Hello {{ receiver_name }},</p>
+            <p>Here is the latest news update for you:</p>
+            <img src="https://d2g355lhiymhv6.cloudfront.net/wp-content/uploads/2012/07/05094950/laptop-with-email-notification-alert-virtual-screen.jpg" alt="News Image" class="image">
+            <p><strong>Headline:</strong> {{ news_title }}</p>
+            <p>{{ news_summary }}</p>
+            <p>Xəbərdar olun və gözəl gün keçirin!</p>
+        </div>
+        <div class="footer">
+            &copy; {{ year }} News Inc. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

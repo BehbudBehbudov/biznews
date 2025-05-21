@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact{% endblock %}
+
+{% block content%}
+
+     <!-- Display success message -->
+      {% if messages %}
+        <div class="alert alert-success">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    <!-- Contact Start -->
+    <div class="container-fluid mt-5 pt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Bizimlə əlaqə saxlayın</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-4 mb-3">
+                        <div class="mb-4">
+                            <h6 class="text-uppercase font-weight-bold">Əlaqə məlumatı</h6>
+                            <p class="mb-4"> <a href="https://htmlcodex.com/contact-form">Bizimlə əlaqə saxlamaq üçün aşağıdakı formu doldurun və ya birbaşa bizə e-poçt göndərin.</a>Sizin suallarınızı cavablandırmaqdan məmnun olarıq!</p>
+							<div class="mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-map-marker-alt text-primary mr-2"></i>
+                                    <h6 class="font-weight-bold mb-0">Bizim ofis</h6>
+                                </div>
+                                <p class="m-0">{{ site_settings.location }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-envelope-open text-primary mr-2"></i>
+                                    <h6 class="font-weight-bold mb-0">Bizə e-poçt göndərin</h6>
+                                </div>
+                                <p class="m-0">{{ site_settings.email }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-phone-alt text-primary mr-2"></i>
+                                    <h6 class="font-weight-bold mb-0">Bizə Zəng Edin</h6>
+                                </div>
+                                <p class="m-0">{{ site_settings.phone }}</p>
+                            </div>
+                        </div>
+                        <h6 class="text-uppercase font-weight-bold mb-3">Bizimlə əlaqə saxlayın</h6>
+                        <form method="POST">
+                        {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{form.name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                      {{ form.email }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                               {{ form.subject }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.message }}
+                            </div>
+                            <div>
+                                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;"
+                                    type="submit">Mesaj Göndər</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                 <!-- Social Follow Start -->
+                <div class="mb-3">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Bizi İzləyin</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-3">
+                        {% for social in SOCIAL_LINKS %}
+                            <a href="{{ social.url }}" class="d-block w-100 text-white text-decoration-none mb-3" style="background: {{ social.color }};">
+                                <i class="{{ social.icon }} text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                                <span class="font-weight-medium">{{ social.followers }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Social Follow End -->
+
+
+                   <!-- Newsletter Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Xəbər icmalı</h4>
+                        </div>
+                        <div class="bg-white text-center border border-top-0 p-3">
+                            <p>Bizim yeniliklərdən xəbərdar olmaq üçün abunə olun</p>
+                            <form action="{% url 'core:newsletter_signup' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="input-group mb-2" style="width: 100%;">
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="E-poçt adresiniz" required>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary font-weight-bold px-3">Abunə ol</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <small>Bizim yeniliklərdən xəbərdar olun</small>
+                        </div>
+                    </div>
+                    <!-- Newsletter End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

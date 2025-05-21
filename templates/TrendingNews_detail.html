@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <h2 class="text-uppercase font-weight-bold">{{ article.title }}</h2>
+            <p class="text-muted">
+                <small>Published on {{ article.created_at|date:"M d, Y" }} by {{ article.author }}</small>
+            </p>
+
+            <img class="img-fluid w-100 mb-4" src="{{ article.image.url }}" alt="{{ article.title }}">
+
+            <p>{{ article.content }}</p>
+
+            <!-- Geri qayıt düyməsi -->
+            <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+        </div>
+
+        <!-- Sidebar (Trending News, Categories, etc.) -->
+        <div class="col-lg-4">
+            <!-- Trending News -->
+            <div class="mb-3">
+                <div class="section-title mb-0">
+                    <h4 class="m-0 text-uppercase font-weight-bold">Trending News</h4>
+                </div>
+                <div class="bg-white border border-top-0 p-3">
+                    {% for trending in trending_news %}
+                    <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                        <img class="img-fluid" src="{{ trending.image.url }}" alt="{{ trending.title }}">
+                        <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                            <div class="mb-2">
+                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">{{ trending.category }}</a>
+                                <a class="text-body" href=""><small>{{ trending.created_at|date:"M d, Y" }}</small></a>
+                            </div>
+                            <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{% url 'TrendingNews_detail' trending.news.pk %}">
+                                {{ trending.title }}
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

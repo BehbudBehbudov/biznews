@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <!-- News With Sidebar Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title">
+                                <h4 class="m-0 text-uppercase font-weight-bold">Kateqoriyalar</h4>
+                                <a class="text-secondary font-weight-medium text-decoration-none" href="{% url 'core:read_more_category_news' %}">Hamısına Baxın</a>
+                            </div>
+                        </div>
+                        {% for article in news %}
+                        <div class="col-lg-6">
+                            <div class="position-relative mb-3">
+                                <img class="img-fluid w-100" src="{{ article.image.url }}" style="object-fit: cover;">
+                                <div class="bg-white border border-top-0 p-4">
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" href="">{{ article.category }}</a>
+                                        <a class="text-body" href=""><small>{{ article.created_at|date:"M d, Y" }}</small></a>
+                                    </div>
+                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="{% url 'core:category_news_detail' article.pk %}">
+                                        {{ article.title }}
+                                    </a>
+                                    <p class="m-0">{{ article.content|truncatewords:20 }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                    <div class="d-flex align-items-center">
+                                        <small>{{ article.author }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         {% endfor %}
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4">
+                    <!-- Social Follow Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Bizi İzləyin</h4>
+                        </div>
+                        <div class="bg-white border border-top-0 p-3">
+                            {% for social in SOCIAL_LINKS %}
+                                <a href="{{ social.url }}" class="d-block w-100 text-white text-decoration-none mb-3" style="background: {{ social.color }};">
+                                    <i class="{{ social.icon }} text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                                    <span class="font-weight-medium">{{ social.followers }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Social Follow End -->
+
+
+                    <!-- Ads Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Elanlar</h4>
+                        </div>
+                        <div class="bg-white text-center border border-top-0 p-3">
+                            <a href=""><img class="img-fluid" src="{% static 'base_site/img/news-800x500-2.jpg' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <!-- Ads End -->
+
+                   <!-- Trending News Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Populyar xəbərlər</h4>
+                        </div>
+                        <div class="bg-white border border-top-0 p-3">
+                            {% for news in news_list %}
+                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+
+                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">{{ news.category }}</a>
+                                        <a class="text-body" href=""><small>{{ news.published_date }}</small></a>
+                                    </div>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                        href="{% url 'core:PopularNews_detail' news.id %}">{{ news.title }}
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Trending News End -->
+
+
+                    <!-- Newsletter Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Xəbər icmalı</h4>
+                        </div>
+                        <div class="bg-white text-center border border-top-0 p-3">
+                            <p>Bizim yeniliklərdən xəbərdar olmaq üçün abunə olun</p>
+                            <form action="{% url 'core:newsletter_signup' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="input-group mb-2" style="width: 100%;">
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="E-poçt adresiniz" required>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary font-weight-bold px-3">Abunə ol</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <small>Bizim yeniliklərdən xəbərdar olun</small>
+                        </div>
+                    </div>
+                    <!-- Newsletter End -->
+
+                    <!-- Tags Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Teqlər</h4>
+                        </div>
+                        <div class="bg-white border border-top-0 p-3">
+                            <div class="d-flex flex-wrap m-n1">
+                                {% for category in CATEGORIES %}
+                                    <span class="btn btn-sm btn-secondary m-1">{{ category }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- News With Sidebar End -->
+
+{% endblock %}
