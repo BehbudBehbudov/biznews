@@ -1,4 +1,4 @@
-# 3.7 BizNews - News Portal
+# BizNews - News Portal
 
 **BizNews** is a fully functional news portal built with the Django MVT (Model-View-Template) architecture. This application allows users to view news in various categories, write comments, subscribe to newsletters, and send contact information.
 
