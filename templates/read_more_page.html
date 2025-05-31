@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <img class="card-img-top" src="{{ slider.image.url }}" alt="{{ slider.title }}" style="object-fit: cover; height: 300px;">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ slider.title }}</h2>
+                        <p class="card-text">{{ slider.content }}</p>
+                        <p class="text-muted"><small>{{ slider.created_date }}</small></p>
+                        <a href="{% url 'core:home' %}" class="btn btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

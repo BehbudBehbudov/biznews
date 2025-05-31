@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-uppercase font-weight-bold mt-4">{{ article.title }}</h2>
+    <p class="text-muted">Published on {{ article.created_at|date:"M d, Y" }} by {{ article.author }}</p>
+
+    <img class="img-fluid w-100 mb-4" src="{{ article.image.url }}" alt="{{ article.title }}">
+
+    <p>{{ article.content }}</p>
+
+    <a href="{% url 'core:read_more_category_news' %}" class="btn btn-primary mt-3">Kateqoriyalar səhifəsinə qayıt</a>
+</div>
+{% endblock %}
