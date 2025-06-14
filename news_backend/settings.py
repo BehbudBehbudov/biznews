@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['13.48.10.45','biznews.sohretaga.com','www.biznews.sohretaga.com']
 
 
 # Application definition
@@ -139,7 +139,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'core/static'),
 ]
 
 MEDIA_URL = '/media/'
